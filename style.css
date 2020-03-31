@@ -1,0 +1,63 @@
+body {
+    background-image: url(/img/bookshop.jpg);
+
+    
+}
+
+h1 {
+    color: gold;
+    
+}
+
+h2 {
+    color: rgb(235, 171, 8);
+}
+
+.search-book {
+    padding: 5px;
+}
+
+.add-book {
+    padding: 5px;
+}
+
+.books-container {
+    color: rgb(185, 137, 16)
+    
+
+}
+
+.books-container td {
+    padding: 5px;
+}
+
+.books-container .actions {
+    column-span: 3;
+}
+
+.book-details {
+   
+    border: 2px solid black;
+    display: none;
+}
+
+.exit-btn {
+    float: right;
+    height: 20px
+}
+
+.books-container th {
+    border-bottom: goldenrod 3px solid;
+}
+
+/* books tabke */
+.books-container table {
+    border: goldenrod 3px solid;
+    border-collapse: collapse;
+}
+
+.books-container td {
+    border: goldenrod 1px solid;
+}
+
+
