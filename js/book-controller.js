@@ -27,7 +27,8 @@ function onAddBook() {
     const elPriceInput = document.querySelector('.add-book input[name="price"]');
     const title = elTitleInput.value;
     const price = elPriceInput.value;
-    if(price <= 0) return;
+    if(price <= 0 || title ==='') return;
+    
     // console.log(title);
     // console.log(price);
     addBook(title, price);
@@ -35,7 +36,7 @@ function onAddBook() {
     elTitleInput.value = '';
     elPriceInput.value = '';
     
-    saveBookstoStorage();
+    
 }
 
 
@@ -60,6 +61,7 @@ function onReadDetails(bookIdx) {
     elBookDetails.style.display = 'block';
     // var gElBookDesc = document.querySelector('.book-desc');
     getBookDetails(bookIdx);
+    // onSetRating(bookIdx);
 }
 
 
@@ -77,4 +79,25 @@ function onSetLang(lang) {
     else document.body.classList.remove('rtl')
     renderBooks();
     doTrans();
+}
+
+function renderDetailsModal(booksIdx) {
+    document.querySelector('.book-details h2').innerText = gBooks[booksIdx].title; 
+    var bookImage = gBooks[booksIdx].Idx;
+    
+    
+    document.querySelector('.book-details .book-image').innerHTML = `
+    <img src="/img/${bookImage}.jpg" width="200px" alt="">`; 
+    
+    gElBookDesc.innerHTML = gBooks[booksIdx].desc;
+    var rate = gBooks[booksIdx].rating
+    onSetRating(rate);
+}
+
+function onSetRating(booksRate) {
+   //debugger
+   console.log(booksRate);
+    
+    
+    
 }

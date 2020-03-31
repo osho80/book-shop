@@ -1,6 +1,7 @@
 'use strict';
 
 const KEY = 'books';
+const IdxKEY = 'idx';
 var gBooks;
 var gBookIdx = 1001
 var gElBookDesc = document.querySelector('.book-desc');//.innerHTML;
@@ -19,20 +20,23 @@ function _createBook(title, price) {
 
 function createBooks() {
     var books = loadFromStorage(KEY);
+    if (!books || !books.length) {
+        books = [];
+        books.push(_createBook('Romeo and Juliette', 9.80));
+        books.push(_createBook('El amor en los tiempos de corona', 21.70));
+        books.push(_createBook('Learn to code', 32.90));
 
-    if (books && books.length) {        //cars if condition is better
-        gBooks = books;
-        saveToStorage(KEY, gBooks)
-        return
     }
+    // if (books && books.length) {        //cars if condition is better
+    //     gBooks = books;
+    //     saveToStorage(KEY, gBooks)
+    //     return
+    // }
 
-    books = [];
-    books.push(_createBook('Romeo and Juliette', 9.80));
-    books.push(_createBook('El amor en los tiempos de corona', 21.70));
-    books.push(_createBook('Learn to code', 32.90));
-
+    gBookIdx = 1004;
     gBooks = books;
     saveToStorage(KEY, gBooks)
+    saveToStorage(IdxKEY, gBookIdx)
 
 }
 
@@ -59,9 +63,12 @@ function updateBook(bookIdx, newPrice) {
 }
 
 function addBook(title, price) {
+    gBookIdx = parseInt(loadFromStorage(IdxKEY));
     var book = _createBook(title, price);
     gBooks.unshift(book);
-    saveToStorage();
+    saveToStorage(KEY, gBooks);
+    saveToStorage(IdxKEY, gBookIdx)
+    // gBookIdx++
 }
 
 function getBookDetails(bookIdx) {
@@ -71,8 +78,9 @@ function getBookDetails(bookIdx) {
         return bookIdx === book.Idx
     }) 
     
+    renderDetailsModal(booksIdx);
     // console.log(gElBookDesc);
-    gElBookDesc.innerHTML = gBooks[booksIdx].desc;
+                //gElBookDesc.innerHTML = gBooks[booksIdx].desc;
     // console.log(gBooks[booksIdx].desc);
     
     
