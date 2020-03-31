@@ -2,8 +2,8 @@
 
 function onInit() {
     createBooks();
+    // doTrans();
     renderBooks();
-    doTrans();
 }
 
 function renderBooks() {
@@ -11,7 +11,7 @@ function renderBooks() {
     var books = gBooks;
     var strHTMLs = books.map(function getBookHTML(book) {
         return `<tr>
-        <td>${book.Idx}</td> <td>${book.title}</td> <td>${formatCurrency(book.price)}</td> 
+        <td>${book.Idx}</td> <td>${book.title}</td> <td data-trans="bookPrice">parseFloat("${book.price}")}</td> 
         <td><button class="read" onclick="onReadDetails(${book.Idx})" data-trans="detailsBtn">Details</button></td>
         <td><button class="update" onclick="onUpdateBook(${book.Idx})" data-trans="updateBtn">Update</button></td>
         <td><button class="delete" onclick="onRemoveBook(${book.Idx})" data-trans="deleteBtn">Delete</button></td></tr>`
@@ -75,6 +75,6 @@ function onSetLang(lang) {
     // TODO: if lang is hebrew add RTL class to document.body
     if (lang === 'he') document.body.classList.add('rtl')
     else document.body.classList.remove('rtl')
-    renderBooks();
     doTrans();
+    renderBooks();
 }

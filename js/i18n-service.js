@@ -43,7 +43,7 @@ var gTrans = {
         en: 'Actions',
         he: 'פעולות'
     },
-    booksdetails : {    // title in modal
+    booksdetails: {    // title in modal
         en: 'Book\'s details',
         he: 'פרטי הספר'
     },
@@ -62,11 +62,8 @@ var gTrans = {
     deleteBtn: {
         en: 'Delete',
         he: 'הסר'
-    },
-    currency: {
-        en: '$',
-        he: '?'
-    } 
+    }
+    
 }
 
 var gCurrLang = 'en';
@@ -81,7 +78,7 @@ function getTrans(transKey) {
     var langTransMap = gTrans[transKey]
     // If key is unknown return 'UNKNOWN'
     if (!langTransMap) return 'UNKNOWN';
-    
+
     // If translation not found - use english
     var trans = langTransMap[gCurrLang]
     if (!trans) trans = langTransMap['en']
@@ -91,17 +88,24 @@ function getTrans(transKey) {
 function doTrans() {
     var els = document.querySelectorAll('[data-trans]')
     console.log('els', els);
-    els.forEach(el =>{
+    els.forEach(el => {
         const key = el.dataset.trans;
         const trans = getTrans(key)
-
-        if (el.placeholder)  el.placeholder = trans
+        // console.log(trans);
+        
+        if (el.placeholder) el.placeholder = trans
         else el.innerText = trans
     })
 }
 
 
 function formatCurrency(num) {
-    return new Intl.NumberFormat('he-IL',{ style: 'currency', currency: 'ILS' }).format(num);
+    var price;
+    if (gCurrLang === 'en') {
+        price = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
+    } else {
+        price = new Intl.NumberFormat('he-IL', { style: 'currency', currency: 'ILS' }).format(num*4);
+    }
+    return price;
+    // return new Intl.NumberFormat('he-IL', { style: 'currency', currency: 'ILS' }).format(num);
 }
-
