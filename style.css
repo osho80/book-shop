@@ -4,6 +4,14 @@ body {
     
 }
 
+body.rtl {
+    direction: rtl;
+}
+
+body.rtl .btn-delete {
+    float: left;
+} 
+
 h1 {
     color: gold;
     
@@ -31,8 +39,8 @@ h2 {
     padding: 5px;
 }
 
-.books-container .actions {
-    column-span: 3;
+td.actions {
+    col-span: 3;
 }
 
 .book-details {

@@ -7,26 +7,30 @@
     <title>My Library</title>
 </head>
 <body onload="onInit()">
-    <h1>Book Shelf</h1>
-    <h2>A good boook will take you a long way... even while quarantined</h2>
+    <h1 data-trans="title">Book Shelf</h1>
+    <h2 data-trans="subtitle">A good boook will take you a long way... even while quarantined</h2>
+    <select class="set-lang" onchange="onSetLang(this.value)">
+        <option value="en">English</option>
+        <option value="he">עברית</option>
+    </select>
     <section class="search-book">
-        <input type="text" name="search-book" placeholder="Enter title / author">
-        <button onclick="onSearchBook()">Search</button>
+        <input type="text" name="search-book" data-trans="searchInput" placeholder="Enter title / author">
+        <button onclick="onSearchBook()" data-trans="searchBtn">Search</button>
     </section>
     <section class="add-book">
-        <input type="text" name="title" placeholder="Book title">
-        <input type="number" name="price" placeholder="Price">
-        <button onclick="onAddBook()">Add book</button>  
+        <input type="text" name="title" data-trans="addTitleInput" placeholder="Book title">
+        <input type="number" name="price" data-trans="addPriceInput" placeholder="Price">
+        <button onclick="onAddBook()" data-trans="addBtn">Add book</button>  
     </section>
     <section class="books-container">
         <table>
             <thead>
-                <td>Idx</td>
-                <td>Title</td>
-                <td>Price</td>
-                <td class="actions">Actions</td>
+                <td data-trans="tableIdx">Idx</td>
+                <td data-trans="tableBookTitle">Title</td>
+                <td data-trans="tableBookPrice">Price</td>
+                <td data-trans="tableActions" colspan="3">Actions</td>
             </thead>
-            <tbody>
+            <tbody id="books-display">
 
             </tbody>
         </table>
@@ -34,8 +38,8 @@
     <section class="book-details">
         <button onclick="closeDetailModal()" class="exit-btn">X</button>
         <!-- <span class="exit-btn">X</span> -->
-        <h2>Book's details</h2>
-        <h3>Book's rating <span>0</span>/10</h3>
+        <h2 data-trans="booksdetails">Book's details</h2>
+        <h3 data-trans="booksrating">Book's rating <span>0</span>/10</h3>
         <span class="book-desc"></span>
         <article class="rate">
             
@@ -47,6 +51,7 @@
 
     <script src="js/util-service.js"></script>
     <script src="js/storage-service.js"></script>
+    <script src="js/i18n-service.js"></script>
     <script src="js/book-service.js"></script>
     <script src="js/book-controller.js"></script>
 </body>

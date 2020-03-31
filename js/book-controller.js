@@ -2,20 +2,23 @@
 
 function onInit() {
     createBooks();
+    // doTrans();
     renderBooks();
 }
 
 function renderBooks() {
+    //debugger
     var books = gBooks;
     var strHTMLs = books.map(function getBookHTML(book) {
         return `<tr>
-        <td>${book.Idx}</td> <td>${book.title}</td> <td>${book.price} $</td>
-        <td><button class="read" onclick="onReadDetails(${book.Idx})">Details</button></td>
-        <td><button class="update" onclick="onUpdateBook(${book.Idx})">Update</button></td>
-        <td><button class="delete" onclick="onRemoveBook(${book.Idx})">Delete</button></td></tr>`
+        <td>${book.Idx}</td> <td>${book.title}</td> <td>${book.price}$</td> 
+        <td><button class="read" onclick="onReadDetails(${book.Idx})" data-trans="detailsBtn">Details</button></td>
+        <td><button class="update" onclick="onUpdateBook(${book.Idx})" data-trans="updateBtn">Update</button></td>
+        <td><button class="delete" onclick="onRemoveBook(${book.Idx})" data-trans="deleteBtn">Delete</button></td></tr>`
     })
 
-    document.querySelector('.books-container tbody').innerHTML = strHTMLs.join('');
+    document.getElementById('books-display').innerHTML = strHTMLs.join('');
+    // document.querySelector('.books-container tbody').innerHTML = strHTMLs.join('');
 }
 
 
@@ -64,4 +67,14 @@ function closeDetailModal() {
     document.querySelector('.book-details').style.display = 'none';
     // elBookDetails.display = 'none';
     //document.querySelector('.book-details').hidden = true;
+}
+
+
+function onSetLang(lang) {
+    setLang(lang);
+    // TODO: if lang is hebrew add RTL class to document.body
+    if (lang === 'he') document.body.classList.add('rtl')
+    else document.body.classList.remove('rtl')
+    doTrans();
+    render();
 }
